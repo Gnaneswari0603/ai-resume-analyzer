@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7fb">
+
+    <title>AI Resume Analyzer</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HERO SECTION -->
+        <header class="hero">
+            <h1>AI Resume Analyzer</h1>
+
+            <p>
+                Upload your resume and analyze its structure,
+                skills, and content using AI-powered tools.
+            </p>
+        </header>
+
+
+        <!-- RESUME UPLOAD -->
+        <section class="upload-card">
+
+            <h2>Upload Your Resume</h2>
+
+            <p class="upload-description">
+                Supported formats: PDF and DOCX
+            </p>
+
+            <form id="resumeForm">
+
+                <div class="upload-box">
+
+                    <input
+                        type="file"
+                        id="resumeFile"
+                        name="file"
+                        accept=".pdf,.docx"
+                        required
+                    >
+
+                    <label for="resumeFile">
+                        Choose Resume
+                    </label>
+
+                    <p id="fileName">No file selected</p>
+
+                </div>
+
+                <button type="submit" id="analyzeBtn">
+                    Analyze Resume
+                </button>
+
+            </form>
+
+            <p id="status" role="status" aria-live="polite"></p>
+
+        </section>
+
+
+        <!-- RESUME ANALYSIS RESULTS -->
+        <section id="results" class="results-section">
+
+            <h2>Resume Analysis</h2>
+
+
+            <!-- RESUME INFORMATION -->
+            <div class="result-card">
+
+                <h3>Resume Information</h3>
+
+                <p>
+                    <strong>Filename:</strong>
+                    <span id="resultFilename"></span>
+                </p>
+
+            </div>
+
+
+            <!-- DETECTED SKILLS -->
+            <div class="result-card">
+
+                <h3>Skills Detected</h3>
+
+                <div id="skillsContainer"></div>
+
+                <div class="skill-actions">
+
+                    <button type="button" id="editSkillsBtn">
+                        Edit Skills
+                    </button>
+
+                    <button
+                        type="button"
+                        id="addSkillBtn"
+                        style="display: none;"
+                    >
+                        + Add Skill
+                    </button>
+
+                    <button
+                        type="button"
+                        id="saveSkillsBtn"
+                        style="display: none;"
+                    >
+                        Save Skills
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESUME SECTIONS -->
+            <div class="result-card">
+
+                <h3>Resume Sections</h3>
+
+                <div id="sectionsContainer"></div>
+
+            </div>
+
+
+            <!-- EXTRACTED TEXT -->
+            <div class="result-card">
+
+                <h3>Extracted Text</h3>
+
+                <div id="resumeText"></div>
+
+            </div>
+
+
+            <!-- JOB DESCRIPTION -->
+            <div class="result-card jd-card">
+
+                <h3>Job Description</h3>
+
+                <p>
+                    Paste the job description below to compare it
+                    with your resume.
+                </p>
+
+                <textarea
+                    id="jobDescription"
+                    placeholder="Paste the job description here..."
+                    rows="10"
+                ></textarea>
+
+                <button type="button" id="compareJDBtn">
+                    Compare Resume with JD
+                </button>
+
+                <p id="jdStatus" role="status" aria-live="polite"></p>
+
+            </div>
+
+
+            <!-- JD COMPARISON RESULTS -->
+            <div
+                class="result-card"
+                id="jdResults"
+                style="display: none;"
+            >
+
+                <h3>JD Matching Results</h3>
+
+
+                <!-- SKILL MATCH SCORE WITH PROGRESS BAR -->
+                <div class="match-percentage">
+
+                    <h4>Resume Match Score</h4>
+
+                    <div class="match-score-row">
+
+                        <div class="match-score-number">
+                            <span id="matchPercentage">0</span>
+                            <span class="match-percent-symbol">%</span>
+                        </div>
+
+                        <p class="match-caption">
+                            Skill compatibility with the job description
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="match-progress-track"
+                        role="progressbar"
+                        aria-label="Resume skill match"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        id="matchProgressBar"
+                    >
+                        <div
+                            id="matchProgressFill"
+                            class="match-progress-fill"
+                        ></div>
+                    </div>
+
+                </div>
+
+
+                <!-- MATCHING SKILLS -->
+                <div class="jd-result-section">
+
+                    <h4>Matching Skills</h4>
+
+                    <div id="matchingSkills"></div>
+
+                </div>
+
+
+                <!-- MISSING SKILLS -->
+                <div class="jd-result-section">
+
+                    <h4>Missing Skills</h4>
+
+                    <div id="missingSkills"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="/static/js/script.js"></script>
+
+</body>
+
+</html>
